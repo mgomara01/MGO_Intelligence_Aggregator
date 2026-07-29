@@ -1,0 +1,37 @@
+name: Alvarez Intelligence Brief (daily)
+
+on:
+  schedule:
+    # 14:00 ET = 18:00 UTC (EDT) / 19:00 UTC (EST) — using 18:00 UTC,
+    # adjust by 1hr if running during Standard Time months.
+    - cron: "0 18 * * *"
+  workflow_dispatch: {}   # allows manual "Run workflow" button too
+
+jobs:
+  generate-brief:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate brief
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GMAIL_CREDENTIALS_JSON: ${{ secrets.GMAIL_CREDENTIALS_JSON }}
+          DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
+          OUTPUT_MODE: "drive"
+        run: python scripts/generate_brief.py
+
+      - name: Commit output to repo (archive)
+        run: |
+          git config user.name "alvarez-intel-bot"
+          git config user.email "bot@alvarezplumbing.com"
+          git add output/
+          git commit -m "Brief: $(date +%Y-%m-%d)" || echo "No changes"
+          git push

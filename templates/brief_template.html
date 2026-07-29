@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Alvarez Intelligence Brief</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #1a1a1a; background: #ffffff; margin: 0; padding: 0; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 24px; }
+  .masthead { border-bottom: 4px solid #003DA6; padding-bottom: 16px; margin-bottom: 24px; }
+  .masthead h1 { color: #003DA6; font-size: 26px; margin: 0 0 4px 0; }
+  .masthead .date { color: #555; font-size: 14px; }
+  .source-heading { color: #003DA6; font-size: 18px; border-bottom: 1px solid #d9d9d9; padding-bottom: 6px; margin-top: 32px; }
+  .source-heading .cat { display: inline-block; background: #EB0029; color: #fff; font-size: 11px; font-weight: bold;
+    text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-left: 10px; vertical-align: middle; }
+  .story { margin: 14px 0 18px 0; padding-left: 12px; border-left: 3px solid #e5e5e5; }
+  .headline a { color: #003DA6; font-weight: bold; text-decoration: none; font-size: 15px; }
+  .headline a:hover { text-decoration: underline; }
+  .summary { color: #333; font-size: 14px; margin: 4px 0; }
+  .signal { color: #444; font-size: 13px; background: #f5f7fb; padding: 8px 10px; border-radius: 4px; }
+  .no-content { color: #888; font-style: italic; font-size: 13px; }
+  table.flash { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  table.flash th { background: #003DA6; color: #fff; text-align: left; padding: 8px; font-size: 13px; }
+  table.flash td { padding: 8px; border-bottom: 1px solid #e5e5e5; font-size: 13px; }
+  .pri-red { color: #EB0029; font-weight: bold; }
+  .pri-yellow { color: #b58900; font-weight: bold; }
+  .pri-green { color: #1a7d3a; font-weight: bold; }
+  .footer { margin-top: 40px; font-size: 11px; color: #999; border-top: 1px solid #e5e5e5; padding-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <h1>Alvarez Intelligence Brief</h1>
+    <div class="date">{{BRIEF_DATE}} &nbsp;|&nbsp; Comprehensive — 20 sources, 3–5 stories each</div>
+  </div>
+
+  {{SOURCE_BLOCKS}}
+
+  <h2 class="source-heading" style="border-bottom-color:#EB0029;">⚡ Strategic Flash</h2>
+  <table class="flash">
+    <tr><th>Priority</th><th>Action</th><th>Owner</th></tr>
+    {{FLASH_ROWS}}
+  </table>
+
+  <div class="footer">
+    Alvarez Plumbing &amp; Air Conditioning — automated intelligence pipeline. Generated every 2 days via GitHub Actions.
+  </div>
+
+</div>
+</body>
+</html>

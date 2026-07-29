@@ -1,0 +1,34 @@
+{
+  "_meta": {
+    "total_sources": 20,
+    "stories_per_source": "3-5",
+    "run_cadence": "every_2_days",
+    "run_time_et": "14:00",
+    "last_reconciled": "2026-07-13"
+  },
+  "gmail_sources": [
+    { "id": 1,  "name": "WSJ — The 10-Point",        "sender": "access@interactive.wsj.com", "subject_filter": "10-Point",  "category": "News & Current Events" },
+    { "id": 2,  "name": "WSJ — In Today's Paper",     "sender": "access@interactive.wsj.com", "subject_filter": "Today's Paper", "category": "News & Current Events" },
+    { "id": 3,  "name": "WSJ — AI & Business",        "sender": "access@interactive.wsj.com", "subject_filter": null, "category": "News & Current Events" },
+    { "id": 4,  "name": "Semafor DC — Morning",       "sender": "washingtondc@semafor.com",   "subject_filter": null, "category": "News & Current Events" },
+    { "id": 5,  "name": "Semafor DC — Afternoon",     "sender": "washingtondc@semafor.com",   "subject_filter": null, "category": "News & Current Events" },
+    { "id": 6,  "name": "Semafor Business",           "sender": "business@semafor.com",       "subject_filter": null, "category": "News & Current Events" },
+    { "id": 8,  "name": "Techpresso",                 "sender": "techpresso@dupple.com",      "subject_filter": null, "category": "Tech & AI" },
+    { "id": 9,  "name": "ChinaTalk",                  "sender": "chinatalk@substack.com",     "subject_filter": null, "category": "Tech & AI" },
+    { "id": 10, "name": "AI Blew My Mind",             "sender": "aiblewmymind@substack.com",  "subject_filter": null, "category": "Tech & AI" },
+    { "id": 11, "name": "MakeUseOf",                  "sender": "newsletter@makeuseof.com",   "subject_filter": null, "category": "Tech & AI" },
+    { "id": 12, "name": "Ruben (Substack)",           "sender": "ruben@substack.com",         "subject_filter": null, "category": "Tech & AI" },
+    { "id": 13, "name": "Tampa Bay Times — DayStarter","sender": "news@elist.tampabay.com",   "subject_filter": null, "category": "Tampa Bay Local" },
+    { "id": 19, "name": "ServiceTitan Newsletter",    "sender": "mcom@servicetitan.com",      "subject_filter": null, "category": "Business Intelligence" },
+    { "id": 20, "name": "The CO Letter",              "sender": "thecoletter@mail.beehiiv.com","subject_filter": null, "category": "Business Intelligence" },
+    { "id": 27, "name": "Substack Weekly Digest",     "sender": "no-reply@substack.com",      "subject_filter": null, "category": "Content/Lifestyle" }
+  ],
+  "web_sources": [
+    { "id": 101, "name": "Tampa Bay Times / Bay 28 (web)", "query": "Tampa Bay news today",                              "category": "Tampa Bay Local" },
+    { "id": 102, "name": "Business Observer FL",           "query": "Business Observer Tampa Bay construction real estate", "category": "Trade / Local Business" },
+    { "id": 103, "name": "Contractor Magazine",            "query": "Contractor Magazine plumbing HVAC news",              "category": "Trade Press" },
+    { "id": 104, "name": "ACHR News",                       "query": "ACHR News HVAC industry",                             "category": "Trade Press" },
+    { "id": 105, "name": "Tampa Bay Business Journal",      "query": "Tampa Bay Business Journal construction HVAC plumbing", "category": "Trade / Local Business" }
+  ],
+  "fallback_rule": "If a Gmail source has zero messages in the lookback window (2 days), attempt a web_search fallback using the source name + 'news' before marking it as NO NEW CONTENT. This closes the gap seen 2026-07-13 test run where Tampa Bay Times DayStarter didn't fire in the email window."
+}
