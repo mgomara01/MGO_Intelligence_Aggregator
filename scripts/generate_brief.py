@@ -149,17 +149,20 @@ def main():
     html_path.write_text(html)
     json_path.write_text(json.dumps(brief, indent=2))
 
-    mode = os.environ.get("OUTPUT_MODE", "local")
-    if mode == "email":
+    mode = os.environ.get("OUTPUT_MODE", "email")
+    if mode in ("email", "both"):
         from gmail_client import send_html_email
         send_html_email(
             to="mgomara01@gmail.com",
             subject=f"Alvarez Intelligence Brief — {date_str}",
             html_body=html,
         )
-    elif mode == "drive":
-        from drive_client import upload_file
-        upload_file(html_path, folder_id=os.environ["DRIVE_FOLDER_ID"])
+    if mode in ("drive", "both"):
+        # Requires a Drive-scoped credential in GMAIL_CREDENTIALS_JSON and
+        # DRIVE_FOLDER_ID secret. Not wired yet — current token only has
+        # gmail.readonly + gmail.send scopes. Add drive_client.py and the
+        # drive.file scope later if Drive archiving is wanted alongside email.
+        print("Drive delivery requested but not yet configured — skipping.")
 
     print(f"Brief generated: {html_path}")
 

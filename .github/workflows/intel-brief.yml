@@ -24,8 +24,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GMAIL_CREDENTIALS_JSON: ${{ secrets.GMAIL_CREDENTIALS_JSON }}
-          DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
-          OUTPUT_MODE: "drive"
+          OUTPUT_MODE: "email"
         run: python scripts/generate_brief.py
 
       - name: Commit output to repo (archive)
