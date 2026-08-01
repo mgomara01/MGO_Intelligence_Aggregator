@@ -98,13 +98,14 @@ Output as clean structured JSON matching this shape:
 
 def summarize_with_claude(blocks: list) -> dict:
     user_content = json.dumps(blocks, indent=2)
-    response = client.messages.create(
+    with client.messages.stream(
         model="claude-sonnet-4-6",
         max_tokens=32000,
         system=SYSTEM_PROMPT,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
         messages=[{"role": "user", "content": user_content}],
-    )
+    ) as stream:
+        response = stream.get_final_message()
     print(f"stop_reason: {response.stop_reason}")
     text_parts = [b.text for b in response.content if b.type == "text"]
     raw = "\n".join(text_parts).strip()
