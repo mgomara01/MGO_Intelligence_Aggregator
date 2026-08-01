@@ -100,15 +100,29 @@ def summarize_with_claude(blocks: list) -> dict:
     user_content = json.dumps(blocks, indent=2)
     response = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=8000,
+        max_tokens=32000,
         system=SYSTEM_PROMPT,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
         messages=[{"role": "user", "content": user_content}],
     )
+    print(f"stop_reason: {response.stop_reason}")
     text_parts = [b.text for b in response.content if b.type == "text"]
     raw = "\n".join(text_parts).strip()
     raw = raw.replace("```json", "").replace("```", "").strip()
-    return json.loads(raw)
+    if not raw:
+        block_types = [b.type for b in response.content]
+        print(f"WARNING: empty text response. Content block types: {block_types}")
+        raise RuntimeError(
+            f"Claude returned no text content (stop_reason={response.stop_reason}, "
+            f"block_types={block_types}). Likely hit max_tokens before finishing — "
+            f"consider raising max_tokens further or reducing sources per run."
+        )
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        print("---RAW RESPONSE (first 2000 chars)---")
+        print(raw[:2000])
+        raise
 
 
 def render_html(brief: dict) -> str:
