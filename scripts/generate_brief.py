@@ -110,6 +110,13 @@ def summarize_with_claude(blocks: list) -> dict:
     text_parts = [b.text for b in response.content if b.type == "text"]
     raw = "\n".join(text_parts).strip()
     raw = raw.replace("```json", "").replace("```", "").strip()
+    # Claude sometimes prefaces the JSON with narration (e.g. describing tool
+    # use). Extract just the JSON object so that preamble text doesn't break
+    # parsing.
+    json_start = raw.find("{")
+    json_end = raw.rfind("}")
+    if json_start != -1 and json_end != -1 and json_end > json_start:
+        raw = raw[json_start:json_end + 1]
     if not raw:
         block_types = [b.type for b in response.content]
         print(f"WARNING: empty text response. Content block types: {block_types}")
